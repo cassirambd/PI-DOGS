@@ -18,7 +18,7 @@ const getApiInfo = async () => {
 };
 
 const getDbInfo = async () => {
-  return Dog.findAll({
+  return Dog.findAll({ //el findAll devuelve siempre un arreglo
     include: {
       model: Temperament,
       attributes: ["name"],
@@ -36,8 +36,9 @@ const getAllInfo = async () => {
   return allInfo;
 };
 
+
 module.exports = {
   getApiInfo,
   getDbInfo,
-  getAllInfo,
+  getAllInfo
 };
