@@ -6,10 +6,12 @@ import Home from "./components/Home";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Route exact path={"/"} component={LandingPage} />
-      <Route path={"/home"} component={Home} />
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Route exact path={"/"} component={LandingPage} />
+        <Route path={"/home"} component={Home} />
+      </BrowserRouter>
+    </div>
   );
 }
 
