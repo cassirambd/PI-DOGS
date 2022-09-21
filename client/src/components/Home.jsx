@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getDogs,
+  getTemperaments,
   orderAlphabetically,
   orderByWeight,
   filterTemperaments,
@@ -14,6 +15,7 @@ import DogCard from "./DogCard";
 import Header from "./Header";
 import Filters from "./Filters";
 import Paginated from "./Paginated";
+import img from "../images/dogcreated.png"
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const Home = () => {
   //con useEffect me voy a traer los personajes del estado cuando el componente se monta
   useEffect(() => {
     dispatch(getDogs());
+    dispatch(getTemperaments())
   }, [dispatch]);
 
   const handleOrderAlphabetically = (e) => {
@@ -43,6 +46,13 @@ const Home = () => {
   const handleOrderByWeight = (e) => {
     e.preventDefault();
     dispatch(orderByWeight(e.target.value));
+    setCurrentPage(1);
+    setOrder(`Ordered ${e.target.value}`);
+  };
+
+  const handleTemperamentFilter = (e) => {
+    e.preventDefault();
+    dispatch(filterTemperaments(e.target.value));
     setCurrentPage(1);
     setOrder(`Ordered ${e.target.value}`);
   };
@@ -60,6 +70,7 @@ const Home = () => {
           <Filters
             handleOrderAlphabetically={handleOrderAlphabetically}
             handleOrderByWeight={handleOrderByWeight}
+            handleTemperamentFilter={handleTemperamentFilter}
             handleFilterCreated={handleFilterCreated}
           />
         </div>
@@ -73,9 +84,9 @@ const Home = () => {
             <div>
               <Link to={`/dog/${d.name}`}>
                 <DogCard
-                  image={d.image.url}
+                  image={d.image ? d.image : img}
                   name={d.name}
-                  temperaments={d.temperaments}
+                  temperament={d.temperament}
                   weight={d.weight}
                   key={d.id}
                 />

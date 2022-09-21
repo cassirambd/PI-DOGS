@@ -1,28 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { getDogs } from "../redux/actions";
-import { useDispatch } from "react-redux";
 
 const Header = () => {
-  const dispatch = useDispatch();
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    dispatch(getDogs());
-  };
 
   return (
     <>
       <div>
-        <button
-          onClick={(e) => {
-            handleClick(e);
-          }}
-        >
-          HOME
+        <button>
+          <Link to={"/home"}>HOME</Link>
         </button>
         <button>
-          <Link to={"/createdog"}>CREATE DOG</Link>
+          <Link to={"/createDog"}>CREATE DOG</Link>
         </button>
       </div>
     </>

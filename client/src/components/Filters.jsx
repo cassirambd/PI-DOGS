@@ -1,21 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+
 const Filters = ({
   handleOrderAlphabetically,
   handleOrderByWeight,
+  handleTemperamentFilter,
   handleFilterCreated,
 }) => {
-  const temperament = useSelector((state) => state.temperaments);
+  const temperaments = useSelector((state) => state.temperaments);
 
   return (
     <>
       <form action="">
         <input
           type="text"
-          name="search dog"
+          name="search"
           placeholder="Search a dog..."
-          // value={filter.name}
+          // value={dogs.name}
           autoComplete={"off"}
         />
         <input type="submit" value="Search" />
@@ -38,11 +40,11 @@ const Filters = ({
         </select>
       </div>
       <div>
-        <select name="Temperament filter">
-          <option value="all temperaments">All temperaments</option>
-          {temperament.length > 0 &&
-            temperament.map((t) => (
-              <option key={t.id} value={t.name}>
+        <select name="Temperament filter" onChange={(e) => handleTemperamentFilter(e)}>
+          <option hidden>All temperaments</option>
+          {temperaments.length > 0 &&
+            temperaments.map((t) => (
+              <option value={t.name} key={t.id}>
                 {t.name}
               </option>
             ))}
