@@ -11,15 +11,21 @@ const DogCard = ({ id, image, name, weight, temperament }) => {
 
   return (
     <>
-      <Link to={`/dog/${name}`}>
+      <Link className={style.link} to={`/dog/${name}`}>
         <div className={style.card} key={id}>
-          <div>
-            <img src={image ? image : img} alt={`dog-${name}`} width="310px" height="220px"/>
-          </div>
-          <div>
-            <h1>{name}</h1>
-            <h3>{temperament}</h3>
-            <h3>{weight} kg</h3>
+          <div className={style.content}>
+            <div className={style.front}>
+              <img
+                className={style.img}
+                src={image ? image : img}
+                alt={`dog-${name}`}
+              />
+              <p className={style.subtitle}>{name}</p>
+            </div>
+            <div className={style.back}>
+              <p className={style.description}>{temperament}</p>
+              <p className={style.description2}>{weight} kg</p>
+            </div>
           </div>
         </div>
       </Link>

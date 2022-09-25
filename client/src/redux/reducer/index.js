@@ -2,7 +2,7 @@ const initialState = {
   allDogs: [],
   copyAllDogs: [],
   temperaments: [],
-  dog_detail: {},
+  dog_details: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_DOGS":
       return {
         ...state,
-        allDogs: action.payload, //alldogs en realidad hace referencia al estado dogs que en un principio es un arreglo vacio
+        allDogs: action.payload.sort((a, b) => a.name.localeCompare(b.name)), //alldogs en realidad hace referencia al estado dogs que en un principio es un arreglo vacio
         copyAllDogs: action.payload,
       };
     case "GET_TEMPERAMENTS":
@@ -21,6 +21,16 @@ const rootReducer = (state = initialState, action) => {
     case "POST_DOG":
       return {
         ...state,
+      };
+    // case "GET_DETAILS":
+    //   return {
+    //     ...state,
+    //     dog_details: action.payload,
+    //   };
+    case "GET_QUERY":
+      return {
+        ...state,
+        allDogs: action.payload,
       };
     case "ORDER_ALPHABETICALLY":
       const sortedArr =
@@ -68,9 +78,7 @@ const rootReducer = (state = initialState, action) => {
       }
       if (action.payload === "max weight") {
         state.allDogs.map((d) => {
-          return (d.weight = parseFloat(
-            d.weight.split("-").reverse()[0]
-          ));
+          return (d.weight = parseFloat(d.weight.split("-").reverse()[0]));
         });
         sortedArr2 = state.allDogs.sort((a, b) => {
           if (isNaN(a.weight) || isNaN(b.weight)) {

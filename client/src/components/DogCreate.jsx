@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import Header from "./Header";
 import DoubleInput from "./DoubleInput";
 import SelectTemperaments from "./SelectTemperaments";
+import style from "../stylesheets/DogCreate.module.css";
 
 const DogCreate = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const DogCreate = () => {
   const [modal, setModal] = useState({
     text: "",
     error: false,
-    success: true,
+    success: false,
   });
 
   useEffect(() => {
@@ -71,9 +72,9 @@ const DogCreate = () => {
   };
 
   const handleAdd = (e) => {
-    if (tempsSelected.length > 6) {
+    if (tempsSelected.length > 4) {
       return setModal({
-        text: "You can't select more than 7 temperaments",
+        text: "You can't select more than 5 temperaments",
         error: true,
         success: false,
       });
@@ -89,9 +90,7 @@ const DogCreate = () => {
   // [...tempsSelected, { [e.target.name]: e.target.value }]
 
   const handleRemove = (e) => {
-    setTempsSelected(
-      tempsSelected.filter((t) => t !== e.target.id)
-    );
+    setTempsSelected(tempsSelected.filter((t) => t !== e.target.id));
   };
 
   const onClose = () => {
@@ -113,6 +112,13 @@ const DogCreate = () => {
     } else if (!name.match(/^[A-Za-z]+$/)) {
       setModal({
         text: "Name must contain only letters",
+        error: true,
+        success: false,
+      });
+      return true;
+    } else if (!name.match(/^[A-Z][a-z]+$/)) {
+      setModal({
+        text: "Name must start with a capital letter",
         error: true,
         success: false,
       });
@@ -171,50 +177,65 @@ const DogCreate = () => {
 
   return (
     <>
-      <Header />
-      {(modal.error || modal.success) && (
-        <Modal modal={modal} onClose={onClose} />
-      )}
-      <div>
-        <h1>CREATE YOUR DOG</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Name: </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name..."
-              value={name}
-              autoComplete={"off"}
-              required
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div>
-            <DoubleInput label="Height" value={height} setState={setHeight} />
-          </div>
-          <div>
-            <DoubleInput label="Weight" value={weight} setState={setWeight} />
-          </div>
-          <div>
-            <DoubleInput
-              label="Life span"
-              value={life_span}
-              setState={setLifeSpan}
-            />
-          </div>
-          <div>
-            <SelectTemperaments
-              temperament={temperament}
-              tempsSelected={tempsSelected}
-              handleAdd={handleAdd}
-              handleRemove={handleRemove}
-            />
-          </div>
-          <div>
-            <Button type={"submit"} text={"CREATE"} />
-          </div>
-        </form>
+      <div className={style.container}>
+        {(modal.error || modal.success) && (
+          <Modal modal={modal} onClose={onClose} />
+        )}
+        <div className={style.header}>
+          <Header />
+        </div>
+        <div className={style.main}>
+          <section className={style.section}>
+            <h1 className={style.title}>CREATE YOUR DOG</h1>
+            <form onSubmit={handleSubmit} className={style.form}>
+              <div className={style.subtitle}>
+                <label>Name: </label>
+                <input
+                  className={style.input}
+                  type="text"
+                  name="name"
+                  placeholder="Name..."
+                  value={name}
+                  autoComplete={"off"}
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className={style.subtitle}>
+                <DoubleInput
+                  label="Height"
+                  value={height}
+                  setState={setHeight}
+                />
+              </div>
+              <div className={style.subtitle}>
+                <DoubleInput
+                  label="Weight"
+                  value={weight}
+                  setState={setWeight}
+                />
+              </div>
+              <div className={style.subtitle}>
+                <DoubleInput
+                  label="Life span"
+                  value={life_span}
+                  setState={setLifeSpan}
+                />
+              </div>
+              <div className={style.subtitle}>
+                <SelectTemperaments
+                  temperament={temperament}
+                  tempsSelected={tempsSelected}
+                  handleAdd={handleAdd}
+                  handleRemove={handleRemove}
+                />
+              </div>
+              <div className={style.button_div}>
+                <Button type={"submit"} text={"CREATE"} />
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </>
   );

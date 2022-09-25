@@ -15,7 +15,7 @@ import DogCard from "./DogCard";
 import Header from "./Header";
 import Filters from "./Filters";
 import Paginated from "./Paginated";
-import img from "../images/dogcreated.png"
+import img from "../images/dogcreated.png";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const Home = () => {
   //con useEffect me voy a traer los personajes del estado cuando el componente se monta
   useEffect(() => {
     dispatch(getDogs());
-    dispatch(getTemperaments())
+    dispatch(getTemperaments());
   }, [dispatch]);
 
   const handleOrderAlphabetically = (e) => {
@@ -64,9 +64,9 @@ const Home = () => {
 
   return (
     <>
-      <div className={style.body}>
+      <div className={style.home}>
         <Header />
-        <div>
+        <div className={style.filters}>
           <Filters
             handleOrderAlphabetically={handleOrderAlphabetically}
             handleOrderByWeight={handleOrderByWeight}
@@ -74,26 +74,26 @@ const Home = () => {
             handleFilterCreated={handleFilterCreated}
           />
         </div>
-        <Paginated
-          dogsPerPage={dogsPerPage}
-          allDogs={allDogs.length}
-          pagination={pagination}
-        />
         {currentDogs?.map((d) => {
           return (
-            <div>
-              <Link to={`/dog/${d.name}`}>
-                <DogCard
-                  image={d.image ? d.image : img}
-                  name={d.name}
-                  temperament={d.temperament}
-                  weight={d.weight}
-                  key={d.id}
-                />
-              </Link>
+            <div className={style.card}>
+              <DogCard
+                image={d.image ? d.image : img}
+                name={d.name}
+                temperament={d.temperament}
+                weight={d.weight}
+                key={d.id}
+              />
             </div>
           );
         })}
+        <div className={style.pages}>
+          <Paginated
+            dogsPerPage={dogsPerPage}
+            allDogs={allDogs.length}
+            pagination={pagination}
+          />
+        </div>
       </div>
     </>
   );

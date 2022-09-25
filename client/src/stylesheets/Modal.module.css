@@ -1,0 +1,29 @@
+.section {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: rgba(245, 245, 245, 0.921);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em 2em;
+  margin-left: 48em;
+  margin-bottom: 10em;
+  border-radius: 0.5em;
+}
+
+.container p {
+  font-size: 1.2em;
+  margin-top: 1.5em;
+}

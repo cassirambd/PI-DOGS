@@ -1,5 +1,74 @@
-.cards {
+.card {
+  width: 18em;
+  height: 17em;
+  cursor: pointer;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
+
+.content {
+  height: 1.5em;
+  text-align: center;
+  position: relative;
+  font-family: 'Fredoka One', cursive;
+  color: rgba(0, 0, 0, 0.8);
+  transition: all 1.85s;
+  background: linear-gradient(180deg, #fffffff2 10%, #ffffff 80%);
+  border-radius: 10px;
+  box-shadow: 6px 6px 2px 1px rgba(0, 0, 0, 0.5);
+  padding: 9em;
+  transform-style: preserve-3d;
+}
+
+.card:hover .content {
+  transform: rotateY(0.5turn);
+}
+
+.front,
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1.2em;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.img {
+  transform: translateZ(5rem);
+  width: 100%;
+  height: 80%;
+  border-radius: 10px;
+}
+
+.subtitle {
+  transform: translateZ(2rem);
+  font-size: 1.2em;
+  margin-top: 15px;
+}
+
+.back {
+  display: inline-block;
+  padding-top: 50px;
+  transform: rotateY(0.5turn);
+  background: rgba(216, 172, 130, 0.882);
+  border-width: 2px;
+  border-radius: 10px;
+}
+
+.description {
+  transform: translateZ(3rem);
+  font-size: 1.2em;
+}
+
+.description2 {
+  transform: translateZ(3rem);
+  font-size: 1.2em;
+}
+
+.link {
+  text-decoration: none;
+}
+ 

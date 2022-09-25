@@ -1,4 +1,5 @@
 import React from "react";
+import style from "../stylesheets/Paginated.module.css";
 
 const Paginated = ({ dogsPerPage, allDogs, pagination }) => {
   const pageNumbers = [];
@@ -8,12 +9,12 @@ const Paginated = ({ dogsPerPage, allDogs, pagination }) => {
   }
 
   return (
-    <nav>
-      <ul>
+    <nav className={style.nav}>
+      <ul className={style.list}>
         {pageNumbers &&
           pageNumbers.map((number) => (
-            <li key={number}>
-              <a onClick={() => pagination(number)}>{number}</a>
+            <li key={number} className={style.element}>
+              <a onClick={() => pagination(number)} className={style.number}>{number}</a>
             </li>
           ))}
       </ul>

@@ -32,12 +32,41 @@ export const postDog = (payload) => {
   return async (dispatch) => {
     try {
       const json = await axios.post("http://localhost:3001/dog", payload);
+      console.log(json)
       return json;
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+// export const dogDetails = (payload) => {
+//   return async (dispatch) => {
+//     try {
+//       const json = await axios.get(`http://localhost:3001/dogs/${payload}`)
+//       return dispatch({
+//         type: "GET_DETAILS",
+//         payload: json.data
+//       })
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+// }
+
+export const getQuery = (payload) => {
+  return async (dispatch) => {
+    try {
+      const json = await axios.get(`http://localhost:3001/dogs?name=${payload}`)
+      return dispatch({
+        type: "GET_QUERY",
+        payload: json.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
 
 export const orderAlphabetically = (payload) => {
   return {

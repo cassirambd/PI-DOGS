@@ -1,18 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "../stylesheets/Header.module.css";
 
 const Header = () => {
-
   return (
     <>
-      <div>
-        <button>
-          <Link to={"/home"}>HOME</Link>
+      <header className={style.header}>
+        <button className={style.button}>
+          <Link id="link" to={"/home"}>
+            <span className={style.box}>HOME</span>
+          </Link>
         </button>
-        <button>
-          <Link to={"/createDog"}>CREATE DOG</Link>
+        <button className={style.button}>
+          <Link id="link" to={"/createDog"}>
+            <span className={style.box}>CREATE DOG</span>
+          </Link>
         </button>
-      </div>
+      </header>
     </>
   );
 };
