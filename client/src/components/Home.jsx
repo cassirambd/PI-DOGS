@@ -15,6 +15,7 @@ import DogCard from "./DogCard";
 import Header from "./Header";
 import Filters from "./Filters";
 import Paginated from "./Paginated";
+import Loader from "./Loader";
 import img from "../images/dogcreated.png";
 
 const Home = () => {
@@ -74,21 +75,29 @@ const Home = () => {
             handleFilterCreated={handleFilterCreated}
           />
         </div>
-        {currentDogs?.map((d) => {
-          return (
-            <div className={style.card}>
-              <DogCard
-                image={d.image ? d.image : img}
-                name={d.name}
-                temperament={d.temperament}
-                weight={d.weight}
-                key={d.id}
-              />
-            </div>
-          );
-        })}
+        {currentDogs.length > 0 ? (
+          currentDogs.map((d) => {
+            return (
+              <div className={style.card}>
+                <DogCard
+                  image={d.image ? d.image : img}
+                  name={d.name}
+                  temperament={d.temperament}
+                  min_weight={d.min_weight}
+                  max_weight={d.max_weight}
+                  key={d.id}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <div className={style.loader}>
+            <Loader />
+          </div>
+        )}
         <div className={style.pages}>
           <Paginated
+            currentPage={currentPage}
             dogsPerPage={dogsPerPage}
             allDogs={allDogs.length}
             pagination={pagination}

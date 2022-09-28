@@ -11,6 +11,7 @@ const DoubleInput = ({ value, setState, label }) => {
           type="number"
           name="min"
           placeholder="Min"
+          min={1}
           value={value.min}
           autoComplete={"off"}
           required
@@ -22,6 +23,7 @@ const DoubleInput = ({ value, setState, label }) => {
           type="number"
           name="max"
           placeholder="Max"
+          min={1}
           value={value.max}
           autoComplete={"off"}
           required

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Concert+One&family=Courgette&family=Dangrek&family=Fredoka+One&family=Itim&family=Neucha&family=Pangolin&family=Patrick+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Concert+One&family=Courgette&family=Dangrek&family=Fredoka+One&family=Itim&family=Neucha&family=Pangolin&family=Patrick+Hand&family=Sniglet&display=swap");
 
 .main {
   display: flex;
@@ -10,7 +10,7 @@
 
 .title {
   font-size: 40px;
-  font-family: "Pangolin", cursive;
+  font-family: "Sniglet", cursive;
   margin: 0.1em;
   color: rgba(49, 42, 36, 0.9);
   text-shadow: -1px 0 rgb(255, 255, 255), 0 3px rgb(255, 255, 255),
@@ -105,7 +105,7 @@
   width: 180px;
   height: 50px;
   border-radius: 10px;
-  font-family: "Pangolin", cursive;
+  font-family: "Sniglet", cursive;
   font-weight: 600;
   font-size: 17px;
   text-align: center;

@@ -1,6 +1,6 @@
 .home {
   background-repeat: no-repeat;
-  background: url(../images/test3.jpg);
+  background: url(../images/test16.jpg);
   background-size: cover;
   position: absolute;
   overflow-y: scroll;
@@ -34,4 +34,9 @@
   justify-content: center;
 }
 
+.loader {
+  display: flex;
+  margin: 1em;
+  padding-bottom: 20em;
+}
 

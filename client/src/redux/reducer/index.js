@@ -3,6 +3,7 @@ const initialState = {
   copyAllDogs: [],
   temperaments: [],
   dog_details: [],
+  dogsWeight: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -58,41 +59,67 @@ const rootReducer = (state = initialState, action) => {
         allDogs: sortedArr,
       };
     case "ORDER_BY_WEIGHT":
-      let sortedArr2;
-      if (action.payload === "min weight") {
-        state.allDogs.map((d) => {
-          return (d.weight = parseFloat(d.weight.split("-")[0]));
-        });
-        sortedArr2 = state.allDogs.sort((a, b) => {
-          if (isNaN(a.weight) || isNaN(b.weight)) {
-            return -1;
-          }
-          if (a.weight > b.weight) {
-            return 1;
-          }
-          if (b.weight > a.weight) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-      if (action.payload === "max weight") {
-        state.allDogs.map((d) => {
-          return (d.weight = parseFloat(d.weight.split("-").reverse()[0]));
-        });
-        sortedArr2 = state.allDogs.sort((a, b) => {
-          if (isNaN(a.weight) || isNaN(b.weight)) {
-            return 1;
-          }
-          if (a.weight > b.weight) {
-            return -1;
-          }
-          if (b.weight > a.weight) {
-            return 1;
-          }
-          return 0;
-        });
-      }
+      const sortedArr2 =
+        action.payload === "min weight"
+          ? state.allDogs.sort((a, b) => {
+              if (isNaN(a.min_weight) || isNaN(b.min_weight)) {
+                return -1;
+              }
+              if (parseInt(a.min_weight) > parseInt(b.min_weight)) {
+                return 1;
+              }
+              if (parseInt(a.min_weight) < parseInt(b.min_weight)) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.allDogs.sort((a, b) => {
+              if (isNaN(a.max_weight) || isNaN(b.max_weight)) {
+                return -1;
+              }
+              if (parseInt(a.max_weight) > parseInt(b.max_weight)) {
+                return -1;
+              }
+              if (parseInt(a.max_weight) < parseInt(b.max_weight)) {
+                return 1;
+              }
+              return 0;
+            });
+      // console.log('prop', state.allDogs.weight)
+      // let sortedArr2;
+      // if (action.payload === "min weight") {
+      //   state.allDogs.map((d) => {
+      //     return (d.weight = parseInt(d.weight[0]));
+      //   });
+      //   sortedArr2 = state.allDogs.sort((a, b) => {
+      //     if (isNaN(a.weight) || isNaN(b.weight)) {
+      //       return -1;
+      //     }
+      //     if (a.weight > b.weight) {
+      //       return 1;
+      //     }
+      //     if (b.weight > a.weight) {
+      //       return -1;
+      //     }
+      //     return 0;
+      //   });
+      // }
+      // if (action.payload === "max weight") {
+      //   state.allDogs.map((d) => {
+      //     return (d.weight = parseInt(d.weight.reverse()[0]));
+      //   });
+      //   sortedArr2 = state.allDogs.sort((a, b) => {
+      //     if (isNaN(a.weight) || isNaN(b.weight)) {
+      //       return -1;
+      //     }
+      //     if (a.weight > b.weight) {
+      //       return -1;
+      //     }
+      //     if (b.weight > a.weight) {
+      //       return 1;
+      //     }
+      //     return 0;
+      //   })};
       return {
         ...state,
         allDogs: sortedArr2,

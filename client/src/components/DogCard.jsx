@@ -3,7 +3,7 @@ import style from "../stylesheets/DogCard.module.css";
 import { Link } from "react-router-dom";
 import img from "../images/dogcreated.png";
 
-const DogCard = ({ id, image, name, weight, temperament }) => {
+const DogCard = ({ id, image, name, min_weight, max_weight, temperament }) => {
   // const temperamentsC = temperaments
   //   ? temperaments.map((temp) => temp.name).join(", ")
   //   : "";
@@ -23,8 +23,14 @@ const DogCard = ({ id, image, name, weight, temperament }) => {
               <p className={style.subtitle}>{name}</p>
             </div>
             <div className={style.back}>
-              <p className={style.description}>{temperament}</p>
-              <p className={style.description2}>{weight} kg</p>
+              {!temperament ? (
+                <p className={style.description}><b>Temperament:</b> Not found</p>
+              ) : (
+                <p className={style.description}><b>Temperament:</b> {temperament}</p>
+              )}
+
+              <p className={style.description2}><b>Min weight:</b> {min_weight} kg</p>
+              <p className={style.description2}><b>Max weight:</b> {max_weight} kg</p>
             </div>
           </div>
         </div>

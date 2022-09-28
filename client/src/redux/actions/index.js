@@ -32,10 +32,9 @@ export const postDog = (payload) => {
   return async (dispatch) => {
     try {
       const json = await axios.post("http://localhost:3001/dog", payload);
-      console.log(json)
-      return json;
+      return {success: 'Dog successfully created!'};
     } catch (error) {
-      console.log(error);
+      return { error: error.message};
     }
   };
 };

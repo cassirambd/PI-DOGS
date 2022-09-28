@@ -1,6 +1,7 @@
 import React from "react";
-import { FaCheck, FaExclamationTriangle } from "react-icons/fa";
 import Button from "./Button";
+import warning from "../images/error.png";
+import check from "../images/check.png";
 import style from "../stylesheets/Modal.module.css";
 
 const Modal = ({ modal, onClose }) => {
@@ -10,8 +11,8 @@ const Modal = ({ modal, onClose }) => {
     <>
       <section className={style.section}>
         <div className={style.container}>
-          {error && <FaExclamationTriangle fontSize={60} color={"#c1121f"} />}
-          {success && <FaCheck fontSize={60} color={"#009900"} />}
+          {error && <img src={warning} alt="" width="80px"/>}
+          {success && <img src={check} alt="" width="80px"/>}
           <p>{text}</p>
           <Button text={"OK"} onClick={onClose} />
         </div>

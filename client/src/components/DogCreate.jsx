@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postDog, getTemperaments } from "../redux/actions";
-import { useHistory } from "react-router-dom";
+import { postDog, getTemperaments, getDogs } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import Modal from "./Modal";
 import Header from "./Header";
@@ -12,8 +12,16 @@ import style from "../stylesheets/DogCreate.module.css";
 
 const DogCreate = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
+  // const navigate = useNavigate();
   const temperament = useSelector((state) => state.temperaments);
+  const dogs = useSelector((state) => state.allDogs);
+  const dogsName = dogs.map((d) => d.name);
+  // console.log("names", dogsName)
+
+  useEffect(() => {
+    dispatch(getDogs());
+  }, [dispatch]);
 
   const [name, setName] = useState("");
   const [height, setHeight] = useState({
@@ -28,12 +36,14 @@ const DogCreate = () => {
     min: "",
     max: "",
   });
+  const [image, setImage] = useState("");
   const [tempsSelected, setTempsSelected] = useState([]);
   const [modal, setModal] = useState({
     text: "",
     error: false,
     success: false,
   });
+  // console.log('1', tempsSelected)
 
   useEffect(() => {
     dispatch(getTemperaments());
@@ -41,40 +51,51 @@ const DogCreate = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (Validate()) return;
-
-    const finalHeight = `${height.min} - ${height.max}`;
-    const finalWeight = `${weight.min} - ${weight.max}`;
+    if (validate()) return;
     const finalLifeSpan = `${life_span.min} - ${life_span.max} years`;
     const dataDog = {
       name,
-      height: finalHeight,
-      weight: finalWeight,
+      min_height: height.min,
+      max_height: height.max,
+      min_weight: weight.min,
+      max_weight: weight.max,
+      image,
       life_span: finalLifeSpan,
       temperament: tempsSelected,
     };
-
-    dispatch(postDog(dataDog));
-
-    setModal({
-      text: "Dog successfully created!",
-      error: false,
-      success: true,
-    });
-
-    setName("");
-    setHeight({ min: "", max: "" });
-    setWeight({ min: "", max: "" });
-    setLifeSpan({ min: "", max: "" });
-    setTempsSelected([]);
-    history.push("/home");
+    const res = dispatch(postDog(dataDog))
+    if (res.error) {
+      return setModal({
+        text: res.error,
+        error: true,
+        success: false,
+      });
+    } else {
+      return setModal({
+        text: "Dog successfully created!",
+        error: false,
+        success: true,
+      }),
+        setName(""),
+        setHeight({ min: "", max: "" }),
+        setWeight({ min: "", max: "" }),
+        setLifeSpan({ min: "", max: "" }),
+        setImage(""),
+        setTempsSelected([]);
+    }
+    // history.push("/home")
   };
+  // setName(""),
+  // setHeight({ min: "", max: "" }),
+  // setWeight({ min: "", max: "" }),
+  // setLifeSpan({ min: "", max: "" }),
+  // setImage(""),
+  // setTempsSelected([]);
 
   const handleAdd = (e) => {
-    if (tempsSelected.length > 4) {
+    if (tempsSelected.length > 5) {
       return setModal({
-        text: "You can't select more than 5 temperaments",
+        text: "You can't select more than 6 temperaments",
         error: true,
         success: false,
       });
@@ -83,7 +104,6 @@ const DogCreate = () => {
     for (const key of tempsSelected) {
       if (key.temperament === e.target.value) return;
     }
-
     setTempsSelected([...tempsSelected, e.target.value]);
   };
 
@@ -100,8 +120,8 @@ const DogCreate = () => {
       success: false,
     });
   };
-
-  const Validate = () => {
+  // console.log('2', tempsSelected)
+  const validate = () => {
     if (!name) {
       setModal({
         text: "Name is required",
@@ -109,14 +129,16 @@ const DogCreate = () => {
         success: false,
       });
       return true;
-    } else if (!name.match(/^[A-Za-z]+$/)) {
+    }
+    if (!name.match(/^[A-Za-z]+$/)) {
       setModal({
         text: "Name must contain only letters",
         error: true,
         success: false,
       });
       return true;
-    } else if (!name.match(/^[A-Z][a-z]+$/)) {
+    }
+    if (!name.match(/^[A-Z][a-z]+$/)) {
       setModal({
         text: "Name must start with a capital letter",
         error: true,
@@ -124,6 +146,15 @@ const DogCreate = () => {
       });
       return true;
     }
+    if (dogsName.includes(name)) {
+      setModal({
+        text: `The name ${name} already exists`,
+        error: true,
+        success: false,
+      });
+      return true;
+    }
+
 
     if (parseFloat(height.min) === 0 || parseFloat(height.max) === 0) {
       setModal({
@@ -132,7 +163,8 @@ const DogCreate = () => {
         success: false,
       });
       return true;
-    } else if (parseFloat(height.min) > parseFloat(height.max)) {
+    }
+    if (parseFloat(height.min) > parseFloat(height.max)) {
       setModal({
         text: "The min height can't be greater than the max height",
         error: true,
@@ -148,7 +180,8 @@ const DogCreate = () => {
         success: false,
       });
       return true;
-    } else if (parseFloat(weight.min) > parseFloat(weight.max)) {
+    } 
+    if (parseFloat(weight.min) > parseFloat(weight.max)) {
       setModal({
         text: "The min weight can't be greater than the max weight",
         error: true,
@@ -164,13 +197,23 @@ const DogCreate = () => {
         success: false,
       });
       return true;
-    } else if (parseFloat(life_span.min) > parseFloat(life_span.max)) {
+    } 
+    if (parseFloat(life_span.min) > parseFloat(life_span.max)) {
       setModal({
         text: "The min life span can't be greater than the max life span",
         error: true,
         success: false,
       });
       return true;
+    }
+
+    if (tempsSelected.length === 0) {
+      setModal({
+        text: "You must select at least one temperament",
+        error: true,
+        success: false,
+      });
+      return true
     }
     return false;
   };
@@ -220,6 +263,18 @@ const DogCreate = () => {
                   label="Life span"
                   value={life_span}
                   setState={setLifeSpan}
+                />
+              </div>
+              <div className={style.subtitle}>
+                <label>Image: </label>
+                <input
+                  className={style.input}
+                  type="text"
+                  name="image"
+                  placeholder="Url..."
+                  value={image}
+                  autoComplete={"off"}
+                  onChange={(e) => setImage(e.target.value)}
                 />
               </div>
               <div className={style.subtitle}>

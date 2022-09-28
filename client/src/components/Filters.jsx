@@ -26,7 +26,7 @@ const Filters = ({
             <option value="Z-A">Z-A</option>
           </select>
         </div>
-        <div className={style.div}>
+        <div className={style.div}> 
           <select
             name="Order by weight"
             onChange={(e) => handleOrderByWeight(e)}

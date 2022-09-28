@@ -33,13 +33,23 @@ const DogDetails = () => {
         <div className={style.main}>
           {typeof dog === "object" && Object.keys(dog).length > 0 ? (
             <article className={style.article}>
-              <img className={style.img} src={dog.image ? dog.image : img} alt={`img-${dog.name}`} />
+              <img
+                className={style.img}
+                src={dog.image ? dog.image : img}
+                alt={`img-${dog.name}`}
+              />
               <section className={style.data}>
                 <h1 className={style.name}>{dog.name}</h1>
-                <p className={style.p}>{dog.temperament}</p>
-                <p className={style.p}>{dog.height} cm</p>
-                <p className={style.p}>{dog.weight} kg</p>
-                <p className={style.p}>{dog.life_span}</p>
+                {dog.temperament ? (
+                  <p className={style.p}><b>Temperament:</b> {dog.temperament}</p>
+                ) : (
+                  <p className={style.p}><b>Temperament:</b> not found</p>
+                )}
+                <p className={style.p}><b>Min height:</b> {dog.min_height} cm</p>
+                <p className={style.p}><b>Max height:</b> {dog.max_height} cm</p>
+                <p className={style.p}><b>Min weight:</b> {dog.min_weight} kg</p>
+                <p className={style.p}><b>Max weight:</b> {dog.max_weight} kg</p>
+                <p className={style.p}><b>Life span:</b> {dog.life_span}</p>
               </section>
             </article>
           ) : (

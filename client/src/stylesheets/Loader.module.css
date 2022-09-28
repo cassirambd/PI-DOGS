@@ -1,5 +1,5 @@
 .loader {
-  display: flex;
+  position: relative;
   margin-top: 10em;
 }
 

@@ -25,7 +25,7 @@ const SelectTemperaments = ({
       {tempsSelected.length > 0 && (
         <div className={style.temperaments}>
           {tempsSelected.map((t) => (
-            <p key={t} className={style.selected}>
+            <span key={t} className={style.selected}>
               {t}
               <span className={style.x}
                 id={`${t}`}
@@ -34,7 +34,7 @@ const SelectTemperaments = ({
               >
                 x
               </span>
-            </p>
+            </span>
           ))}
         </div>
       )}

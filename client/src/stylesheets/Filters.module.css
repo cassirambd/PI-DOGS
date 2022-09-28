@@ -18,13 +18,13 @@
   height: 2em;
   width: 12em;
   color: rgba(0, 0, 0, 0.8);
-  font-family: 'Pangolin', cursive;
+  font-family: 'Sniglet', cursive;
   font-weight: bold;
   font-size: 1em;
   border: 2px solid rgb(200, 200, 200);
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  border-color: rgba(154, 112, 84, 0.7);
+  border-color: rgba(154, 112, 84, 0.9);
 }
 
 .option {
