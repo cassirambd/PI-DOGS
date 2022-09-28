@@ -40,20 +40,20 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.delete("/:id", async function (req, res) {
-//   const { id } = req.params;
-//   try {
-//     if (id) {
-//       await Dog.destroy({
-//         where: {
-//           id: id,
-//         },
-//       });
-//       res.status(200).json({ success: "Dog succesfully deleted!" });
-//     }
-//   } catch (error) {
-//     res.send(400).json({ error: error.message });
-//   }
-// });
+router.delete("/:id", async function (req, res) {
+  const { id } = req.params;
+  try {
+    if (id) {
+      await Dog.destroy({
+        where: {
+          id: id,
+        },
+      });
+      res.status(200).json({ success: "Dog succesfully deleted!" });
+    }
+  } catch (error) {
+    res.send(400).json({ error: error.message });
+  }
+});
 
 module.exports = router;
