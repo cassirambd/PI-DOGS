@@ -24,11 +24,11 @@ const SelectTemperaments = ({
       {tempsSelected.length > 0 && (
         <div className={style.temperaments}>
           {tempsSelected.map((t) => (
-            <span key={t.temperament} className={style.selected}>
-              {t.temperament}
+            <span key={t} className={style.selected}>
+              {t}
               <span
                 className={style.x}
-                id={`${t.temperament}`}
+                id={`${t}`}
                 onClick={handleRemove}
                 title={"Remover"}
               >

@@ -9,7 +9,7 @@ export const getDogs = () => {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      return { error: error.message};
     }
   };
 };
@@ -23,7 +23,7 @@ export const getTemperaments = () => {
         payload: json.data,
       });
     } catch (error) {
-      console.log(error);
+      return { error: error.message};
     }
   };
 };
@@ -32,26 +32,12 @@ export const postDog = (payload) => {
   return async (dispatch) => {
     try {
       const json = await axios.post("http://localhost:3001/dog", payload);
-      return {success: 'Dog successfully created!'};
+      return {success: 'Dog was successfully created!'};
     } catch (error) {
       return { error: error.message};
     }
   };
 };
-
-// export const dogDetails = (payload) => {
-//   return async (dispatch) => {
-//     try {
-//       const json = await axios.get(`http://localhost:3001/dogs/${payload}`)
-//       return dispatch({
-//         type: "GET_DETAILS",
-//         payload: json.data
-//       })
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-// }
 
 export const getQuery = (payload) => {
   return async (dispatch) => {
@@ -62,7 +48,7 @@ export const getQuery = (payload) => {
         payload: json.data
       })
     } catch (error) {
-      console.log(error)
+      return { error: error.message}
     }
   }
 }

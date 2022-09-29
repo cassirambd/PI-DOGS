@@ -12,20 +12,20 @@ const getApiInfo = async () => {
     .join()
     .split(",")
     .sort();
-    
-    await temperaments
+
+  await temperaments
     .filter((t, i) => temperaments.indexOf(t) === i)
     .forEach(
       (t) =>
         t.trim() !== "" &&
-        Temperament.findOrCreate({ 
+        Temperament.findOrCreate({
           where: {
             name: t.trim(),
           },
         })
     );
 
-  const allTemperaments = await Temperament.findAll();
+  const allTemperaments = await Temperament.findAll({ order: [["name"]] });
   return allTemperaments;
 };
 
