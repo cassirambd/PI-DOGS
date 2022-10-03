@@ -41,7 +41,7 @@ const DogDetails = () => {
                 <h1 className={style.name}>{dog.name}</h1>
                 {dog.temperament ? (
                   <p className={style.p}>
-                    <b>Temperament:</b> {dog.temperament}
+                    <b>Temperament: </b> {dog.temperament}
                   </p>
                 ) : (
                   <p className={style.p}>

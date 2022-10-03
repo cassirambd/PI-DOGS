@@ -39,7 +39,7 @@ const DogCreate = () => {
     text: "",
     error: false,
     success: false,
-  });
+  }); 
 
   const handleSubmit = (e) => {
     e.preventDefault();

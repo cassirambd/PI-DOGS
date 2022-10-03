@@ -23,6 +23,7 @@
   color: rgba(0, 0, 0, 0.71);
   font-family: 'Fredoka One', cursive;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .element:hover {

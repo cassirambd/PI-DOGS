@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_DOGS":
       return {
         ...state,
-        allDogs: action.payload.sort((a, b) => a.name.localeCompare(b.name)), //alldogs en realidad hace referencia al estado dogs que en un principio es un arreglo vacio
+        allDogs: action.payload.sort((a, b) => a.name.localeCompare(b.name)),
         copyAllDogs: action.payload,
       };
     case "GET_TEMPERAMENTS":
@@ -23,11 +23,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-    // case "GET_DETAILS":
-    //   return {
-    //     ...state,
-    //     dog_details: action.payload,
-    //   };
     case "GET_QUERY":
       return {
         ...state,
@@ -85,41 +80,6 @@ const rootReducer = (state = initialState, action) => {
               }
               return 0;
             });
-      // console.log('prop', state.allDogs.weight)
-      // let sortedArr2;
-      // if (action.payload === "min weight") {
-      //   state.allDogs.map((d) => {
-      //     return (d.weight = parseInt(d.weight[0]));
-      //   });
-      //   sortedArr2 = state.allDogs.sort((a, b) => {
-      //     if (isNaN(a.weight) || isNaN(b.weight)) {
-      //       return -1;
-      //     }
-      //     if (a.weight > b.weight) {
-      //       return 1;
-      //     }
-      //     if (b.weight > a.weight) {
-      //       return -1;
-      //     }
-      //     return 0;
-      //   });
-      // }
-      // if (action.payload === "max weight") {
-      //   state.allDogs.map((d) => {
-      //     return (d.weight = parseInt(d.weight.reverse()[0]));
-      //   });
-      //   sortedArr2 = state.allDogs.sort((a, b) => {
-      //     if (isNaN(a.weight) || isNaN(b.weight)) {
-      //       return -1;
-      //     }
-      //     if (a.weight > b.weight) {
-      //       return -1;
-      //     }
-      //     if (b.weight > a.weight) {
-      //       return 1;
-      //     }
-      //     return 0;
-      //   })};
       return {
         ...state,
         allDogs: sortedArr2,

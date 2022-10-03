@@ -1,7 +1,7 @@
 .container {
   display: flex;
   align-content: center;
-  padding-right: 100px;
+  padding-right: 40px;
 }
 
 .input {

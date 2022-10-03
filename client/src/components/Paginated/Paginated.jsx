@@ -11,12 +11,40 @@ const Paginated = ({ currentPage, dogsPerPage, allDogs, pagination }) => {
   return (
     <nav className={style.nav}>
       <ul className={style.list}>
+        {currentPage > 1 && (
+          <li className={style.element}>
+            <a
+              onClick={() => pagination(currentPage - 1)}
+              className={style.number}
+            >
+              Prev
+            </a>
+          </li>
+        )}
         {pageNumbers &&
           pageNumbers.map((number) => (
-            <li key={number}  className={currentPage === number ? style.active : style.element}>
-              <a onClick={() => pagination(number)} className={style.number}>{number}</a>
+            <li
+              key={number}
+              className={currentPage === number ? style.active : style.element}
+            >
+              <a
+                onClick={() => pagination(number)}
+                className={style.number}
+              >
+                {number}
+              </a>
             </li>
           ))}
+        {currentPage < allDogs / dogsPerPage && (
+          <li className={style.element}>
+            <a
+              onClick={() => pagination(currentPage + 1)}
+              className={style.number}
+            >
+              Next
+            </a>
+          </li>
+        )}
       </ul>
     </nav>
   );

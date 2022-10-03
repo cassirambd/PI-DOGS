@@ -30,7 +30,7 @@ const Home = () => {
   const pagination = (pageNumbers) => {
     setCurrentPage(pageNumbers);
   };
-  //con useEffect me voy a traer los personajes del estado cuando el componente se monta
+ 
   useEffect(() => {
     dispatch(getDogs());
     dispatch(getTemperaments());
@@ -84,6 +84,7 @@ const Home = () => {
                   temperament={d.temperament}
                   min_weight={d.min_weight}
                   max_weight={d.max_weight}
+                  life_span={d.life_span}
                   key={d.id}
                 />
               </div>

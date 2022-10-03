@@ -1,5 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { getDogs } from "../../redux/actions"
 import SearchBar from "../SearchBar/SearchBar";
 import style from "../Filters/Filters.module.css";
 
@@ -9,7 +11,13 @@ const Filters = ({
   handleTemperamentFilter,
   handleFilterCreated,
 }) => {
-  const temperaments = useSelector((state) => state.temperaments);
+const temperaments = useSelector((state) => state.temperaments);
+const dispatch = useDispatch();
+  
+const handleClick = (e) => {
+  e.preventDefault();
+  dispatch(getDogs());
+}
 
   return (
     <>
@@ -62,6 +70,13 @@ const Filters = ({
             <option value="dogs from API">Dogs from API</option>
             <option value="dogs from database">Dogs from database</option>
           </select>
+        </div>
+        <div className={style.div}>
+        <button className={style.button} onClick={handleClick}>
+          <Link to={"/home"}>
+            <span className={style.box}>RESET ALL</span>
+          </Link>
+        </button>
         </div>
       </form>
     </>

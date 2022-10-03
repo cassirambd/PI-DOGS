@@ -32,7 +32,7 @@ export const postDog = (payload) => {
   return async (dispatch) => {
     try {
       const json = await axios.post("http://localhost:3001/dog", payload);
-      return {success: 'Dog was successfully created!'};
+      return json;
     } catch (error) {
       return { error: error.message};
     }
@@ -61,7 +61,6 @@ export const orderAlphabetically = (payload) => {
 };
 
 export const orderByWeight = (payload) => {
-  //el payload seria el value de las opciones del input
   return {
     type: "ORDER_BY_WEIGHT",
     payload: payload,
