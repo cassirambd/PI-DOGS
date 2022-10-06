@@ -41,3 +41,10 @@
   backdrop-filter: blur(5px);
   border-radius: 5px;
 }
+
+@media only screen and (max-width: 650px) {
+  .list {
+    flex-wrap: wrap;
+    backdrop-filter: blur(3px);
+  }
+}

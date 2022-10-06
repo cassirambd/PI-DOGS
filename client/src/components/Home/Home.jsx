@@ -77,7 +77,7 @@ const Home = () => {
         {currentDogs.length > 0 ? (
           currentDogs.map((d) => {
             return (
-              <div className={style.card}>
+              <div key={d.id} className={style.card}>
                 <DogCard
                   image={d.image ? d.image : img}
                   name={d.name}

@@ -68,3 +68,15 @@ form a {
   background-color: rgb(255, 255, 255);
   transition: 0.5s;
 }
+
+@media only screen and (max-width: 650px) {
+  .form {
+    flex-wrap: wrap;
+    padding: 0em;
+    backdrop-filter: blur(3px);
+  }
+
+  .div {
+    margin-bottom: 1em;
+  }
+}

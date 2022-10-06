@@ -156,3 +156,36 @@
   margin-top: 0.2em;
   opacity: 0.8;
 }
+
+@media only screen and (max-width: 650px) {
+  .main {
+    margin: 0em;
+    backdrop-filter: blur(4px);
+    background-repeat: no-repeat;
+    background: url(../../images/wp7.jpg);
+  }
+
+  .section {
+    margin-top: 40px;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .button {
+    font-size: 25px;
+  }
+
+  .btn span {
+    font-size: 15px;
+    width: 140px;
+    height: 40px;
+  }
+
+  .btn {
+    width: 100px;
+    height: 40px;
+  }
+}

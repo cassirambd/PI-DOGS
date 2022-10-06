@@ -85,3 +85,11 @@ header a {
   transform: translateX(0);
   transition: .3s transform linear, .3s height linear .5s;
 }
+
+@media only screen and (max-width: 650px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 0.5em;
+    backdrop-filter: blur(3px);
+  }
+}
