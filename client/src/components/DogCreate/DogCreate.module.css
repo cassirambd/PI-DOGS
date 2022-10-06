@@ -77,12 +77,6 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .container {
-    backdrop-filter: blur(4px);
-    background-repeat: no-repeat;
-    background: url(../../images/wp4.jpg);
-  }
-
   .main {
     margin: 15px;
     padding: 15px;
